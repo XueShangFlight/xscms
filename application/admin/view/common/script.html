@@ -1,0 +1,9 @@
+
+
+{notempty name="editor"}
+    <script src="__CDN__/assets/js/jquery.min.js"></script>
+    <script src="__CDN__/assets/js/require{$Think.config.app_debug?'':'.min'}.js" data-main="__CDN__/assets/js/require-backend{$Think.config.app_debug?'':'.min'}.js?v={$site.version|htmlentities}"></script>
+    {include file="common/editor" /}
+{else/}
+    <script src="__CDN__/assets/js/require{$Think.config.app_debug?'':'.min'}.js" data-main="__CDN__/assets/js/require-backend{$Think.config.app_debug?'':'.min'}.js?v={$site.version|htmlentities}"></script>
+{/notempty}

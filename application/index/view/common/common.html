@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <title>{empty name="title"}{$site.name|htmlentities}{else/}{$title|default=''|htmlentities} – {$site.name|htmlentities}{/empty}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+
+    {if isset($keywords)}
+    <meta name="keywords" content="{$keywords|htmlentities}">
+    {/if}
+    {if isset($description)}
+    <meta name="description" content="{$description|htmlentities}">
+    {/if}
+    {if isset($author)}
+    <meta name="author" content="{$author|htmlentities}">
+    {/if}
+
+    <link rel="shortcut icon" href="__CDN__/template/images/favicon.ico" />
+
+    <link href="__CDN__/assets/css/frontend{$Think.config.app_debug?'':'.min'}.css?v={$Think.config.site.version|htmlentities}" rel="stylesheet">
+    <link rel="stylesheet" href="__CDN__/template/css/common.css" />
+    <script src="__CDN__/template/js/jquery.min.js"></script>
+    <script src="__CDN__/template/js/common.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+    <script src="__CDN__/assets/js/html5shiv.js"></script>
+    <script src="__CDN__/assets/js/respond.min.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+        var require = {
+            config: {$config|json_encode}
+        };
+        var cdn = '__CDN__';
+    </script>
+    {block name="head"}{/block}
+</head>
+<body>
+{include file="common/header" /}
+{block name="main"}{/block}
+{include file="common/footer" /}
+{empty name="iscode"}
+    {$site.sys_code|htmlentities}
+{/empty}
+</body>
+</html>

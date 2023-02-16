@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {include file="common/meta" /}
+    <style>
+        td,
+        .panel-body {border: none !important;}
+        .hhmap {width: 100%;height: 100%;position: fixed;top: 0;left: 0;z-index: 999;background: #fff;display: none;}
+        .backicon {width: 35px;height: 35px;border-radius: 50%;left: 10px;top: 10px;background: #b761c5;line-height: 35px;text-align: center;color: #fff;font-size: 18px;z-index: 1000;position: fixed;cursor: pointer;display: none;}
+        td>label.control-label{
+            width: 100%;
+            height: 27px;
+            line-height: 27px;
+            text-align: right;
+            margin: 0 auto;
+        }
+    </style>
+    <script src="__CDN__/assets/js/jquery.min.js"></script>
+</head>
+<body style="background:#fff;">
+
+<div class="hhmap">
+    <iframe width="100%" height="100%" id="mapPage" frameborder="0" scrolling="no" src=""></iframe>
+</div>
+<div class="backicon"><span class="fa fa-angle-left"></span></div>
+<div class="panel" style="padding:0;">
+    <table class="table tabvh">
+        <tbody>
+        <tr>
+            <td><label class="control-label">公司名称：</label></td>
+            <td><div class="input-group" style="width:550px"><input type="text" placeholder="请填写公司名称" value="" name="email" autocomplete="off" class="form-control b-name"><span class="input-group-addon"><span class="fa fa-cubes"></span></span></div></td>
+        </tr>
+        <tr>
+            <td width="15%"><label class="control-label">选择图标：</label></td>
+            <td>
+                <input type="radio" name="mapstyle" id="mapstyle1" value="1" class="m-checkbox mapstyle" checked="checked"><label for="mapstyle1"></label>&nbsp;&nbsp;<img src="__CDN__/assets/img/map/map1.png" height="50">
+                &nbsp;&nbsp;
+                <input type="radio" name="mapstyle" id="mapstyle2" value="2" class="m-checkbox mapstyle"><label for="mapstyle2"></label>&nbsp;&nbsp;<img src="__CDN__/assets/img/map/map2.png" height="50"> </td>
+        </tr>
+        <tr>
+            <td><label class="control-label">公司电话：</label></td>
+            <td><div class="input-group" style="width:550px"><input type="text" placeholder="请填写公司电话" value="" name="email" autocomplete="off" class="form-control b-tel"><span class="input-group-addon"><span class="glyphicon glyphicon-phone"></span></span></div></td>
+        </tr>
+        <tr>
+            <td><label class="control-label">公司邮箱：</label></td>
+            <td><div class="input-group" style="width:550px"><input type="text" placeholder="请填写公司邮箱" value="" name="email" autocomplete="off" class="form-control b-email"><span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span></div></td>
+        </tr>
+        <tr>
+            <td><label class="control-label">公司地址：</label></td>
+            <td>
+                <div class="input-group" data-toggle="tooltip" data-placement="top" title="点击右侧图标可以选择地图上的点" style="width:550px">
+                    <input type="text" placeholder="请填写公司地址" value="" name="address" autocomplete="off" class="form-control b-address">
+                    <span class="input-group-addon map-pos" style="cursor:pointer; color: #ff003b">
+                        <span class="fa fa-map "></span>
+                    </span>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td><label class="control-label">经纬度：</label></td>
+            <td>
+                <div class="clearfix">
+                    <input type="text" value="" placeholder="经度 数值范围为 0-180°" name="jingdu" class="b-jingdu form-control pull-left" style="width:43%">
+                    <input type="text" value="" placeholder="维度 数值范围为 0-90°" name="weidu" class="b-weidu form-control pull-left" style="width:43%;margin-left: 10px">
+                    <a class="pull-left" href="https://lbs.qq.com/getPoint/" target="_blank" style="margin-left: 5px;margin-top: 5px">
+                        <button type="button" tabindex="999" data-toggle="tooltip" data-placement="top" title="点击跳转至腾讯坐标采集" class="btn btn-purple btn-xs" value="获取" name="send"><span class="glyphicon glyphicon-map-marker"></span> 获取</button>
+                    </a>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td><label class="control-label">宽度高度：</label></td>
+            <td>
+                <div class="clearfix">
+                    <input type="text" value="" placeholder="宽度 需填写单位 px,% 默认100%" name="width" class="b-width form-control pull-left" style="width:43%">
+                    <input type="text" value="" placeholder="高度 需填写单位 px 默认500px" name="height" class="b-height form-control pull-left" style="width:43%;margin-left: 10px">
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td><button type="button" tabindex="999" class="btn btn-success btn-sm tohhmap" value="生成地图" name="send"><span class="fa fa-map-o"></span>&nbsp;生成地图</button></td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="panel-footer" style="padding: 5px 15px;line-height: 1.6"><span class="glyphicon glyphicon-warning-sign"></span> 提示: 公司名称，地址及经纬度必填</div>
+    <script type="text/javascript">
+        $(document).on('click','.tohhmap',function () {
+            var name = $(".b-name").val();
+            var tel = $(".b-tel").val();
+            var email = $(".b-email").val();
+            var address = $(".b-address").val();
+            var jingdu = $(".b-jingdu").val();
+            var weidu = $(".b-weidu").val();
+            var w = $(".b-width").val();
+            var h = $(".b-height").val();
+            var style = $(".mapstyle:checked").val();
+            if (name == '') {
+                Layer.msg('请先输入公司名称', '', 'error');
+                return false;
+            }
+            if (address == '') {
+                Layer.msg('请输入公司地址', '', 'error');
+                return false;
+            }
+            if (jingdu == '' || weidu == '') {
+                Layer.msg('经纬度不能为空~', '', 'error');
+                return false;
+            }
+            if(weidu > 90){
+                Layer.msg('请检查经纬度是否填反了啦~', '', 'error');
+                return false;
+            }
+            uri = 'name=' + name + '&tel=' + tel + '&email=' + email + '&add=' + address + '&jcode=' + jingdu +'&wcode=' + weidu + '&type=' + style;
+            console.log('-----start----');
+            console.log(uri);
+            $(parent.document.body).find('#hhmapuri').val(uri);
+            if (w != '') $(parent.document.body).find('#hhmapwidth').val(w);
+            if (h != '') $(parent.document.body).find('#hhmapheight').val(h);
+            //$(parent.document.body).find('#hhmapmodal').modal('hide')
+            $(parent.document.body).find('.btn-hhmap-close').click();
+
+            console.log('-----end----');
+        })
+        var mapuri = 'https://apis.map.qq.com/tools/locpicker?search=1&type=1&key=PH2BZ-JGZ3X-KZZ4E-TMNFR-LYWU2-YZBIZ&referer=hhcms2.0&policy=1';
+        $(document).on('click','.map-pos',function (e) {
+            $(".backicon,.hhmap").fadeIn(500);
+            $("#mapPage").attr("src", mapuri);
+        })
+        $(document).on('click','.backicon',function (e) {
+            $(".backicon,.hhmap").fadeOut(500);
+        });
+
+        window.addEventListener('message', function (event) {
+            var loc = event.data;
+            if (loc && !loc.module == 'locationPicker') {//防止其他应用也会向该页面post信息，需判断module是否为'locationPicker'
+                alert('非法调用');
+                return false;
+            }
+            var cityname = loc.cityname;
+            var poiname = loc.poiname;
+            var lat = loc.latlng.lat;
+            var lng = loc.latlng.lng;
+            var address = loc.poiaddress;
+            if ($(".b-address").val() == '') $(".b-address").val(address);
+            $(".b-jingdu").val(lng);
+            $(".b-weidu").val(lat);
+            $(".backicon,.hhmap").fadeOut(500);
+        }, false);
+    </script>
+
+</div>
+</body>
+</html>

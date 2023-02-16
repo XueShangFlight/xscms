@@ -1,0 +1,65 @@
+.modal-content {
+    border: solid 1px #ddd;
+    box-shadow: 0 0 15px 3px rgb(0 0 0 / 12%);
+}
+
+.modal-hhtpl {
+    height: 500px;
+    width: 100%;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+.modal-hhtpl .hhtpl-sidebar {
+    background: #fafafa;
+    height: 500px;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    border-right: solid 1px #e5e5e5;
+    position: relative;
+    width: 20%;
+    float: left;
+}
+.modal-hhtpl .hhtpl-sidebar .list-group-item:nth-child(1) {
+    border-top: none;
+}
+
+.modal-hhtpl .hhtpl-sidebar .active {
+    background: #38a0f4;
+    border: none;
+    color: #fff;
+}
+.modal-hhtpl .hhtpl-sidebar .list-group-item {
+    border-radius: 0 !important;
+    border-left: 0;
+    border-right: 0;
+}
+.modal-hhtpl .hhtpl-main {
+    height: 550px;
+    background: #fff;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+    width: 78%;
+    float: right;
+}
+
+.modal-hhtpl .hhtpl-main .tpl-block {
+    width: 100%;
+    margin: 10px auto;
+    overflow: auto;
+    height: 490px;
+    overflow-x: hidden;
+}
+.modal-hhtpl .hhtpl-main .hhtpldiv {
+     width: 360px;
+     height: auto;
+     overflow: hidden;
+     margin: 10px auto;
+     border: dashed 2px #dcdcdc;
+     cursor: pointer;
+     padding: 10px;
+     box-sizing: border-box;
+     overflow-x: auto;
+}

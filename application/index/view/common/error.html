@@ -1,0 +1,60 @@
+<?php
+$cdnurl = function_exists('config') ? config('view_replace_str.__CDN__') : '';
+$publicurl = function_exists('config') ? (config('view_replace_str.__PUBLIC__')?:'/') : '/';
+$debug = function_exists('config') ? config('app_debug') : false;
+
+$lang = [
+    'An error occurred' => '404 错误',
+'Home' => '返回主页',
+'Sorry, the page you specified cannot be accessed' => '抱歉，您指定的页面无法访问',
+];
+
+$langSet = '';
+
+if (isset($_GET['lang'])) {
+$langSet = strtolower($_GET['lang']);
+} elseif (isset($_COOKIE['think_var'])) {
+$langSet = strtolower($_COOKIE['think_var']);
+} elseif (isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
+preg_match('/^([a-z\d\-]+)/i', $_SERVER['HTTP_ACCEPT_LANGUAGE'], $matches);
+$langSet     = strtolower($matches[1]);
+}
+$langSet = $langSet && in_array($langSet, ['zh-cn', 'en']) ? $langSet : 'zh-cn';
+$langSet == 'en' && $lang = array_combine(array_keys($lang), array_keys($lang));
+
+?>
+
+
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title><?=$lang['An error occurred']?></title>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<link rel="shortcut icon" href="<?php echo root().'/public/home/';?>images/favicon.ico" />
+<style>
+body,div,ul,li{ margin:0; padding:0; box-sizing:border-box;font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;}
+body{ background-color:#f2f2f2;}
+a{ text-decoration:none; color:#f60;}
+.ui-error{ width:600px; height:370px; box-shadow:0 0 5px #ddd; border-radius:8px; overflow:hidden; background-color:#fff; position:fixed; top:50%; left:50%; margin-left:-300px; margin-top:-250px;}
+.ui-error img{ height:200px; display:block; margin:60px auto 0 auto; cursor:pointer;}
+.ui-error p{ font-size:14px; text-align:center; color:#999; position:absolute; bottom:0; left:0; width:100%; height:35px; line-height:35px;}
+@media screen and (max-width:767px){
+   .ui-error{ width:100vw; height:100vh; box-shadow:0 0 5px #ddd; border-radius:0;top:0; left:0; margin-left:0; margin-top:0;}
+   .ui-error img{ margin-top:30%; margin-bottom:35px;}
+   .ui-error p{ position:relative;}
+}
+</style>
+</head>
+<body>
+   <div class="ui-error">
+      <img src="<?php echo root().'/template/';?>images/upgrade/404.png" alt="404[来源：iconfont]">
+      <p>
+         <?=$debug?$message:$lang['Sorry, the page you specified cannot be accessed']?>,
+         <a href="<?=$publicurl?>"><?=$lang['Home']?></a>
+      </p>
+   </div>
+</body>
+</html>

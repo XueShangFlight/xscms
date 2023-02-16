@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>在线地图 | {map.name}</title>
+    <script src="//map.qq.com/api/gljs?libraries=hhcms&v=1.exp&key=PH2BZ-JGZ3X-KZZ4E-TMNFR-LYWU2-YZBIZ"></script>
+    <style type="text/css">.tmap-zoom-control{margin:10px 30px 20px;display:-ms-flexbox;display:flex;-ms-flex-direction:column;flex-direction:column;-ms-flex-pack:center;justify-content:center;-ms-flex-align:center;align-items:center;position:relative;width:40px;height:80px;background:#fff;box-shadow:0 8px 19px rgba(41,64,102,.12);border-radius:4px}.tmap-zoom-control .tmap-zoom-content{-ms-flex:auto;flex:auto;-ms-flex-order:1;order:1;-ms-flex-positive:0;flex-grow:0;margin:8px 0}.tmap-zoom-control .tmap-zoom-in{position:absolute;width:24px;height:24px;left:8px;top:8px}.tmap-zoom-control .tmap-zoom-out{position:absolute;width:24px;height:24px;left:8px;top:48px}.tmap-zoom-control .tmap-zoom-spliter{height:1px;width:40px;background-color:#dee2e8;margin:auto}.tmap-zoom-control .tmap-zoom-number{display:inline;height:22px;top:40px;text-align:center;font-size:14px;font-weight:600;font-style:medium;font-family:Microsoft YaHei,PingFang SC;color:#000;line-height:22px}</style><style type="text/css">.rotate-circle{position:relative;width:60px;height:60px;padding:20px 20px 7px}.rotate-circle,.rotate-circle *{box-sizing:content-box}.rotate-circle .rotate-panel{position:relative;left:0;top:-60px;font-size:16px;line-height:normal;font-family:auto}.rotate-circle .rotate-left{top:15px;left:-6px;transform:rotate(-45deg)}.rotate-circle .rotate-left,.rotate-circle .rotate-top{position:absolute;width:30px;height:30px;border-radius:30px 0 0 0;background:#fff}.rotate-circle .rotate-top{left:15px;top:-6px;transform:rotate(45deg)}.rotate-circle .rotate-right{left:36px;top:15px;border-radius:0 30px 0 0}.rotate-circle .rotate-bottom,.rotate-circle .rotate-right{position:absolute;width:30px;height:30px;background:#fff;transform:rotate(45deg)}.rotate-circle .rotate-bottom{left:15px;top:36px;border-radius:0 0 30px 0}.rotate-circle .compass-circle{width:28px;height:28px;background:#fff;border:1px solid rgba(0,20,51,.1);border-radius:50%;position:relative;left:15px;top:-15px;z-index:100}.rotate-circle .compass-img{height:28px;left:30%;position:relative;-moz-user-select:none;-webkit-user-select:none;-ms-user-select:none;user-select:none}.rotate-circle .compass-circle-background{width:28px;height:28px;background:#e7eaef;border:1px solid rgba(0,20,51,.1);border-radius:50%;position:relative;left:15px;top:15px;z-index:50}.rotate-circle .rotate-left-img{transform:scaleY(-1) rotate(-45deg)}.rotate-circle .rotate-left-img,.rotate-circle .rotate-right-img{width:6px;height:17px;position:relative;left:12px;top:5px;-moz-user-select:none;-webkit-user-select:none;-ms-user-select:none;user-select:none;vertical-align:baseline}.rotate-circle .rotate-right-img{transform:rotate(135deg)}.rotate-circle .rotate-top-img{transform:rotate(-45deg);left:10px;top:-1px}.rotate-circle .rotate-bottom-img,.rotate-circle .rotate-top-img{width:8px;height:4px;position:relative;-moz-user-select:none;-webkit-user-select:none;-ms-user-select:none;user-select:none;vertical-align:baseline}.rotate-circle .rotate-bottom-img{transform:rotate(135deg);left:13px;top:2px}.rotate-circle .unclickable-rotate-bottom .rotate-bottom-img,.rotate-circle .unclickable-rotate-left .rotate-left-img,.rotate-circle .unclickable-rotate-right .rotate-right-img,.rotate-circle .unclickable-rotate-top .rotate-top-img{opacity:.3}.rotate-circle .clickable-rotate-bottom:hover,.rotate-circle .clickable-rotate-left:hover,.rotate-circle .clickable-rotate-right:hover,.rotate-circle .clickable-rotate-top:hover{background:#f2f4f8}.rotate-circle .clickable-rotate-bottom:active,.rotate-circle .clickable-rotate-left:active,.rotate-circle .clickable-rotate-right:active,.rotate-circle .clickable-rotate-top:active{background:#e7eaef}</style><style type="text/css">.floor-control{font-size:15px;color:#646464;height:180px;width:38px;background:#fff;position:relative;bottom:83px!important;margin-left:31px;margin-right:30px;border-radius:40px;webkit-user-select:none;ms-user-select:none;moz-user-select:none;apple-user-select:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;z-index:10}.floor-control:after{position:absolute;top:0;left:0;width:200%;height:200%;transform:scale(.5);transform-origin:left top;border-radius:40px;z-index:1000000;box-shadow:0 0 1px 1px rgba(0,0,0,.12)}.floor-control ul{-webkit-padding-start:0;padding-inline-start:0;-webkit-padding-end:0;padding-inline-end:0;-webkit-margin-before:0;margin-block-start:0;-webkit-margin-after:0;margin-block-end:0}.floor-control .arr-top{width:38px;position:absolute;z-index:100;top:-2px}.floor-control .arr-bottom{width:38px;position:absolute;z-index:100;bottom:-2px}.floor-control .floor-control-wrapper{overflow:hidden;height:160px;width:100%;position:absolute;top:10px}.floor-control .floor-control-wrapper .floor-control-list{font-size:12px;list-style-type:none;margin:0}.floor-control .floor-control-wrapper .floor-control-list .floor-control-item{position:relative;display:block;text-align:center;text-decoration:none;width:38px;height:40px;line-height:40px;transition:color .3s ease-in}.floor-control .floor-control-wrapper .floor-control-list .floor-control-item:after{content:"";position:absolute;width:26px;height:26px;border-radius:30px;z-index:-10;pointer-events:none;left:0;right:0;top:0;bottom:0;margin:auto;opacity:0;transition:opacity .2s ease-out;background-color:#4875fd}.floor-control .floor-control-wrapper .floor-control-list .selected-item{color:#fff!important;opacity:1!important}.floor-control .floor-control-wrapper .floor-control-list .selected-item:after{opacity:1}.floor-control .floor-control-wrapper.freezing .floor-control-list .floor-control-item{color:#4d4d4d;opacity:.4}.floor-control-moveup{bottom:83px!important}</style>
+    <script src="__CDN__/assets/js/jquery.min.js"></script>
+    <style type="text/css">
+    html,body,div,p,h2,b{margin: 0px;padding: 0px;}
+    body{height: 100%}
+    #container {width: 100%;height: 100vh;}
+    .markerBounce {animation: bounce 1s infinite ease-in-out alternate; cursor: pointer;}
+    @keyframes bounce {
+        0% {
+            transform: translate(0, 0);
+        }
+        100% {
+            transform: translate(0, -20px);
+        }
+    }
+    .map-show{ width: 460px; height: 240px; background-color: rgba(255,255,255,1); position: fixed; top: 50%; left: 50%; margin-top: -120px; margin-left: -230px; box-sizing: border-box; overflow: hidden; z-index: 9999999999999; padding: 0px; border-radius: 3px; box-shadow: 0 0 15px #666; display: none;}
+    .map-show h2{ height: 55px; line-height: 55px; font-size: 16px; font-weight: normal; background-color: #fafafa; box-sizing: border-box; padding: 0 10px;}
+    .map-show h2 b{ float: right; font-size: 24px; font-weight: normal; cursor: pointer;}
+    .map-show h2 b:hover{ color: #f60;}
+
+    .map-main{ height: auto; width: 100%; padding: 20px; box-sizing: border-box;}
+    .map-main p{ line-height: 240%; color: #666; font-size: 14px;}
+</style>
+</head>
+
+
+
+<body onload="initMap()">
+<div id="container" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); position: relative;"></div>
+
+<div class="map-show" style="display: none;">
+    <h2>{$map.name} <b>×</b></h2>
+    <div style="clear: both;"></div>
+    <div class="map-main">
+        <p>电话：{$map.tel}</p>
+        <p>邮箱：{$map.email}</p>
+        <p>地址：{$map.add}</p>
+    </div>
+    <input id="lat" type="hidden" value="{$map.jcode}">
+    <input id="lng" type="hidden" value="{$map.wcode}">
+    <input id="type" type="hidden" value="{$map.type}">
+</div>
+
+<script>
+    function myMarker(options) {
+        let mydom;
+        TMap.DOMOverlay.call(this, options);
+    }
+    myMarker.prototype = new TMap.DOMOverlay();
+
+    myMarker.prototype.onInit = function (options) {
+        this.position = options.position;
+        this.type = options.type;
+    }
+
+    myMarker.prototype.createDOM = function () {
+        mydom = document.createElement('img');
+        var type = $('#type').val();
+        if(type==1){
+            mydom.src = '__CDN__/assets/img/map/map1.png';
+        }else{
+            mydom.src = '__CDN__/assets/img/map/map2.png';
+        }
+        mydom.style.cssText = [
+            'position: absolute;',
+        ].join('');
+        mydom.setAttribute('class', 'markerBounce');
+        return mydom;
+    }
+    myMarker.prototype.updateDOM = function () {
+        if (!this.map) 	return;
+        let pixel = this.map.projectToContainer(this.position);
+        let left  = pixel.getX() - this.dom.clientWidth / 2 + 'px';
+        let top   = (pixel.getY() - 115) + 'px';
+        this.dom.style.top = top;
+        this.dom.style.left = left;
+
+    }
+    var lng = $('#lng').val();
+    var lat = $('#lat').val();
+    var map, markerBounce;
+    function initMap() {
+        map = new TMap.Map("container", {
+            zoom: 17,
+            pitch: -10, // 俯仰度
+            // rotation: 50, // 旋转角度
+            center: new TMap.LatLng(lng, lat)
+        });
+        markerBounce = new myMarker({
+            map,
+            position: new TMap.LatLng(lng, lat),
+            type: 'bounce'
+        });
+    }
+
+    $("body").on("click",".markerBounce",function(e){
+        $('.map-show').fadeIn(50);
+    });
+
+    $("body").on("click",".map-show h2 b",function(e){
+        $('.map-show').fadeOut(50);
+    });
+
+</script>
+
+</body></html>

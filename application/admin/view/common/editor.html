@@ -1,0 +1,232 @@
+
+<div class="modal fade" id="hhmapmodal" tabindex="-1" role="dialog" data-url="{:url('admin/files/hhmap')}?t={:time()}">
+    <div class="modal-dialog" role="document" style="width:730px; height:565px;">
+        <div class="modal-content">
+            <div class="modal-header" style="padding: 10px 15px">
+                <button type="button" class="close btn-hhmap-close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">雪殇地图在线制作</h4>
+            </div>
+            <div class="modal-body" style="padding: 0">
+                <input type="hidden" value="" id="hhmapuri">
+                <input type="hidden" value="100%" id="hhmapwidth">
+                <input type="hidden" value="500px" id="hhmapheight">
+                <iframe name="iframexiuxiu" class="iframehhmap" width="700" height="440" scrolling="no" frameborder="0" src="{:url('admin/files/loading')}"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="edit135modal" tabindex="-1" role="dialog" data-url="https://www.135editor.com/pure_editor?callback=true&appkey=">
+    <div class="modal-dialog" role="document" style=" width:85%">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close btn-hhmap-close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">135编辑器插件</h4>
+            </div>
+            <div class="modal-body">
+                <iframe name="iframeedit" class="iframeedit" id="editor135" width="100%" height="650px" scrolling="no" frameborder="0" src="{:url('admin/files/loading')}"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="hhwords" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close btn-hhmap-close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">雪殇word导入</h4>
+            </div>
+            <div class="modal-body hhword-modal" style="margin:0; padding:10px;">
+                <div  class="text-warning alert alert-success" style="clear: both; line-height: 20px; margin:0px auto 10px auto;opacity: 0.8">1.默认可上传 .doc,.docx 类型文件。<br/>2.导入成功之后，会自动删除word数据请自己本地备份！<br/>3.内容复杂的word文件解析可能样式有差异！</div>
+                <input type="file" name="file" id="uplaodFile" style="display: none">
+                <button id="plupload-wordFile" type="button" class="btn btn-warning btn-sm btn-hhworddata">
+                    <span class="fa fa-file-word-o"></span> 点击导入word文件
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="hhtpl" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document" style="width:530px; height:565px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close btn-hhmap-close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">雪殇高级编辑器</h4>
+            </div>
+            <div class="modal-body" style="padding:0;">
+                <div class="row modal-hhtpl">
+                    <div class="hhtpl-sidebar">
+                        <?php
+             $tpltype = tpltype();
+             if ( $tpltype !='' ) {
+               foreach( $tpltype as $ttk=>$ttv ) {
+                        $ttkactive = ($ttk==0) ? 'active' : '';
+                        echo '<a href="javascript:void(0)" class="list-group-item hhtpl-type '.$ttkactive.'" data-id="'.$ttv['id'].'">'.$ttv['topic'].'</a>';
+                        }
+                        }
+                        ?>
+                    </div>
+                    <div class="hhtpl-main"><div class="tpl-block"></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<link rel="stylesheet" href="__CDN__/assets/addons/kindeditor/themes/default/default.css?t={:time()}" />
+<link rel="stylesheet" href="__CDN__/assets/addons/kindeditor/plugins/code/prettify.css?t={:time()}" />
+<script src="__CDN__/assets/addons/kindeditor/kindeditor.js?t={:time()}"></script>
+<script src="__CDN__/assets/addons/kindeditor/lang/zh_CN.js?t={:time()}"></script>
+<script src="__CDN__/assets/addons/kindeditor/plugins/code/prettify.js?t={:time()}"></script>
+
+<script type="text/javascript">
+    KindEditor.ready(function(K) {
+        var editor1 = K.create('.kindeditor,.editor', {
+            cssPath          : '__CDN__/assets/addons/kindeditor/plugins/code/prettify.css?t={:time()}',
+            uploadJson       : '{:url("admin/files/editorUpload")}',
+            fileManagerJson  : '{:url("admin/files/filemanger")}',
+            allowFileManager : true,
+            afterCreate : function() {
+                var self = this;
+                K.ctrl(document, 13, function() {
+                    self.sync();
+                    K('form[name=example]')[0].submit();
+                });
+                K.ctrl(self.edit.doc, 13, function() {
+                    self.sync();
+                    K('form[name=example]')[0].submit();
+                });
+            }
+        });
+        prettyPrint();
+        //编辑器模板
+        $("body").on("click",".hhtpldiv",function(e){
+            var html = $(this).html();
+            if ( html == '' ) return false;
+            editor1.insertHtml(html+'<p>&nbsp;</p>');
+            $("#hhtpl").modal('hide');
+        });
+        $(".hhtpl-sidebar .hhtpl-type").click(function(e) {
+            var id = $(this).data('id');
+            $('.hhtpl-type').removeClass('active');
+            $(this).addClass('active');
+            getTpl(id);
+        });
+        getTpl(1);
+        function getTpl(id){
+            $.post('{:url("admin/files/hhtpl")}',{'id':id},function(data){
+                if ( data.state == 1 ) {
+                    $(".tpl-block").html(data.html);
+                } else {
+                    layer.alert(data.msg);
+                }
+            },'json');
+        }
+
+        //雪殇地图生成
+        $(document).on('click','#hhmapmodal .btn-hhmap-close',function () {
+            var uri   = $("#hhmapuri").val();
+            var wid   = $("#hhmapwidth").val();
+            var hei   = $("#hhmapheight").val();
+            var url   = "{:url('files/maps')}";
+            var hhmap = '<iframe src="'+url+'?'+uri+'" name="mapifrm" class="hh-edit-map" width="'+wid+'" height="'+hei+'" frameborder="0" scrolling="no"></iframe>';
+            if ( uri !='' ) {
+                editor1.insertHtml(hhmap);
+                $("#hhmapuri").val('');
+                $("#hhmapwidth").val('100%');
+                $("#hhmapheight").val('500px');
+            }
+        })
+
+        //触发文件上传
+        $(document).on('click','#plupload-wordFile',function (e) {
+            $('#uplaodFile').click();
+        })
+        //雪殇word导入
+        $(document).on('change','#uplaodFile',function (e) {
+            var file = $(this)[0].files[0],
+                form = new FormData();
+
+            form.append("file", file);
+            $.ajax({
+                type: 'post',
+                url: '{:url("admin/files/uploadword")}',
+                data: form,
+                contentType: false,
+                processData: false,
+                beforeSend: function(obj){
+                    $('.btn-hhworddata').addClass('btn-default').removeClass('btn-warning').html('<span class="fa fa-spinner fa-spin"></span> 数据导入中...');
+                },
+                success:function(res){
+                    $('.btn-hhworddata').removeClass('btn-default').addClass('btn-warning').html('<span class="fa fa-file-word-o"></span> 点击导入word文件');
+                    $("#hhwords").modal('hide');
+                    if ( res.success == 1 ) {
+                        layer.msg('word数据导入成功');
+                        editor1.appendHtml(res.html);
+                    } else {
+                        layer.msg(res.msg);
+                    }
+                },
+                error : function(){
+                    layer.msg('上传失败');
+                }
+            });
+        })
+
+        editor135 = document.getElementById('editor135');
+        window.onload = function () {
+            setTimeout(function(){
+                editor135.contentWindow.postMessage(editor1.html(),'*');
+            },1200);
+        };
+        window.addEventListener('message', function (event) {
+            if (typeof event.data !== 'string') return;
+            var data = event.data;
+            editor1.html(data);
+            $("#edit135modal").modal('hide');
+        }, false);
+
+        $("body").on("click",".ke-ill-word",function(e){
+            var content = editor1.text();
+            var html    = editor1.html();
+            var $this   = $(this);
+            if ( $.trim(content) == '' ) { layer.msg('请在编辑器里面输入资料内容'); return false;}
+            $this.html('<span class="fa fa-spinner fa-spin"></span> 检测中..');
+            $.post('{:url("admin/files/ckillegalword")}',{'content':content},function(data){
+                $this.html('敏感词检测');
+                if ( data.state == 2 ) {
+                    layer.confirm('敏感词检测',{
+                        icon: 0,
+                        btnAlign: 'c',
+                        title : '敏感词检测',
+                        content : data.msg+'，点击确定按钮将匹配掉敏感词。',
+                        closeBtn : 2,
+                        anim  : 2,
+                        id : 'illegalWord',
+                        skin: 'illegalWord',
+                    },function (index) {
+                        $this.html('<span class="fa fa-spinner fa-spin"></span> 删除中..');
+                        $.post('{:url("admin/files/illegalword")}',{'content':html},function(data){
+                            $this.html('敏感词检测');
+                            if ( data.state == 1 ) {
+                                layer.msg('已将敏感词替换成**');
+                                editor1.html('');
+                                editor1.appendHtml(data.html);
+                            } else {
+                                layer.msg(data.msg);
+                            }
+                            layer.close(index);
+                        },'json');
+                    },function (index) {
+                        layer.close(index);
+                    })
+                }else {
+                    layer.msg(data.msg);
+                }
+            },'json');
+        });
+    });
+</script>
